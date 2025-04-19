@@ -4,6 +4,10 @@ import { Card, CardContent } from "../components/ui/Card";
 import { Link } from "react-router-dom";
 import { LogOut, User, FileText, Edit } from "lucide-react";
 import jsPDF from "jspdf";
+import { Line } from "react-chartjs-2";
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
+
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 const Dashboard = () => {
   const skills = [
@@ -99,6 +103,20 @@ const Dashboard = () => {
     );
   };
 
+  // Chart.js data
+  const data = {
+    labels: skills.map((skill) => skill.name),
+    datasets: [
+      {
+        label: 'Skill Level',
+        data: skills.map((skill) => skill.level),
+        borderColor: 'rgb(75, 192, 192)',
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        tension: 0.1,
+      },
+    ],
+  };
+
   return (
     <div className="min-h-screen flex bg-gradient-to-br from-blue-900 via-indigo-800 to-purple-900 text-white">
       {/* Sidebar */}
@@ -146,15 +164,9 @@ const Dashboard = () => {
         <Card id="skills">
           <CardContent className="p-6">
             <h2 className="text-2xl font-semibold mb-4 text-blue-900">Your Skills Progress</h2>
-            {skills.map((skill, index) => (
-              <div key={index} className="mb-4">
-                <div className="flex justify-between mb-1 text-sm font-medium text-gray-700">
-                  <span>{skill.name}</span>
-                  <span>{skill.level}%</span>
-                </div>
-                <Progress value={skill.level} />
-              </div>
-            ))}
+            <div className="mb-6">
+              <Line data={data} options={{ responsive: true, maintainAspectRatio: false }} height={250} />
+            </div>
           </CardContent>
         </Card>
 

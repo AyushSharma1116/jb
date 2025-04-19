@@ -69,8 +69,11 @@ const IndustryRoleSelection = () => {
   };
 
   return (
-    <div className="h-full min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-950 via-blue-900 to-blue-950 text-white px-4 w-screen">
-      <div className="w-full max-w-lg bg-white p-8 rounded-xl shadow-lg">
+<div
+  className="h-full min-h-screen flex items-center justify-center text-white px-4 w-screen bg-cover bg-center"
+  style={{ backgroundImage: "url('src/assets/ai image.jpg')" }}
+>
+<div className="w-full max-w-lg bg-sky-100 p-8 rounded-xl shadow-lg text-white">
         <h2 className="text-3xl font-bold text-center text-blue-900 mb-6">Get Started</h2>
 
         {/* Industry Dropdown */}
@@ -163,7 +166,7 @@ const IndustryRoleSelection = () => {
         <div className="mt-8 text-center">
           <Link
             to="/dashboard"
-            className="w-full bg-yellow-400 text-blue-900 font-semibold py-3 px-6 rounded-lg hover:bg-yellow-300 transition duration-300"
+            className="w-full bg-yellow-400 text-blue-800 font-semibold py-3 px-6 rounded-lg hover:bg-yellow-300 transition duration-300"
           >
             Start Your Journey
           </Link>
