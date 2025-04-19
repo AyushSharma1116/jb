@@ -69,7 +69,7 @@ const IndustryRoleSelection = () => {
   };
 
   return (
-    <div className="h-full min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-900 via-indigo-800 to-purple-900 text-white px-4 w-screen">
+    <div className="h-full min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-950 via-blue-900 to-blue-950 text-white px-4 w-screen">
       <div className="w-full max-w-lg bg-white p-8 rounded-xl shadow-lg">
         <h2 className="text-3xl font-bold text-center text-blue-900 mb-6">Get Started</h2>
 

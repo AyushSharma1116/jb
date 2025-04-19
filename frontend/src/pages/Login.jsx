@@ -20,11 +20,11 @@ const Login = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-900 via-indigo-800 to-purple-900 text-white px-4 w-[98vw]">
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-950 via-blue-900 to-blue-950 text-white px-4 w-[98vw]">
       <div className="bg-white text-gray-800 rounded-2xl shadow-2xl w-full max-w-md p-8 md:p-10 animate-fade-in-up">
         <h2 className="text-3xl font-bold text-center mb-6">Welcome Back</h2>
         <p className="text-sm text-center text-gray-500 mb-8">
-          Log in to continue your journey with <span className="text-indigo-600 font-semibold">Job Buddy</span>
+          Log in to continue your journey with <span className="text-blue-500 font-semibold">Job Buddy</span>
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-6">
