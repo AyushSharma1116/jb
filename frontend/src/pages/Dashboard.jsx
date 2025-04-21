@@ -79,28 +79,28 @@ const Dashboard = () => {
       }
     };
 
-    return (
-      <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-        <div className="bg-white p-6 rounded-xl text-black w-full max-w-lg shadow-lg overflow-y-auto max-h-[90vh]">
-          <h2 className="text-2xl font-bold mb-4">Resume Builder</h2>
-          <input name="name" placeholder="Name" onChange={handleChange} className="w-full border p-2 mb-2" />
-          <input name="email" placeholder="Email" onChange={handleChange} className="w-full border p-2 mb-2" />
-          <textarea name="experience" placeholder="Experience" onChange={handleChange} className="w-full border p-2 mb-2" />
-          <textarea name="education" placeholder="Education Details" onChange={handleChange} className="w-full border p-2 mb-2" />
-          <textarea name="qualification" placeholder="Qualification" onChange={handleChange} className="w-full border p-2 mb-2" />
-          <textarea name="achievements" placeholder="Achievements" onChange={handleChange} className="w-full border p-2 mb-2" />
-          <textarea name="coursework" placeholder="Relevant Coursework" onChange={handleChange} className="w-full border p-2 mb-2" />
+    // return (
+    //   <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+    //     <div className="bg-white p-6 rounded-xl text-black w-full max-w-lg shadow-lg overflow-y-auto max-h-[90vh]">
+    //       <h2 className="text-2xl font-bold mb-4">Resume Builder</h2>
+    //       <input name="name" placeholder="Name" onChange={handleChange} className="w-full border p-2 mb-2" />
+    //       <input name="email" placeholder="Email" onChange={handleChange} className="w-full border p-2 mb-2" />
+    //       <textarea name="experience" placeholder="Experience" onChange={handleChange} className="w-full border p-2 mb-2" />
+    //       <textarea name="education" placeholder="Education Details" onChange={handleChange} className="w-full border p-2 mb-2" />
+    //       <textarea name="qualification" placeholder="Qualification" onChange={handleChange} className="w-full border p-2 mb-2" />
+    //       <textarea name="achievements" placeholder="Achievements" onChange={handleChange} className="w-full border p-2 mb-2" />
+    //       <textarea name="coursework" placeholder="Relevant Coursework" onChange={handleChange} className="w-full border p-2 mb-2" />
 
-          <label className="block mb-2 mt-2 font-semibold">Upload Image (Optional):</label>
-          <input type="file" accept="image/*" onChange={handleImageChange} className="mb-4" />
+    //       <label className="block mb-2 mt-2 font-semibold">Upload Image (Optional):</label>
+    //       <input type="file" accept="image/*" onChange={handleImageChange} className="mb-4" />
 
-          <div className="flex justify-between">
-            <button onClick={handleDownload} className="bg-blue-600 text-white px-4 py-2 rounded">Download PDF</button>
-            <button onClick={() => setShowResumeForm(false)} className="bg-gray-400 text-white px-4 py-2 rounded">Cancel</button>
-          </div>
-        </div>
-      </div>
-    );
+    //       <div className="flex justify-between">
+    //         <button onClick={handleDownload} className="bg-blue-600 text-white px-4 py-2 rounded">Download PDF</button>
+    //         <button onClick={() => setShowResumeForm(false)} className="bg-gray-400 text-white px-4 py-2 rounded">Cancel</button>
+    //       </div>
+    //     </div>
+    //   </div>
+    // );
   };
 
   // Chart.js data
@@ -118,7 +118,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen flex bg-gradient-to-br from-blue-900 via-indigo-800 to-purple-900 text-white">
+    <div className="w-[98vw] min-h-screen flex bg-gradient-to-br from-blue-900 via-indigo-800 to-purple-900 text-white">
       {/* Sidebar */}
       <aside className="w-64 bg-white dark:bg-gray-900 text-gray-800 dark:text-white p-6 flex flex-col justify-between shadow-xl">
         <div>
