@@ -1,62 +1,102 @@
 import React, { useState } from "react";
-import API from "../services/api";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
-  const [form, setForm] = useState({ name: "", email: "", password: "" });
+  const navigate = useNavigate();
 
-  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
 
-  const handleSubmit = async (e) => {
+  const handleChange = (e) => {
+    setForm((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      await API.post("/users/register", form);
-      alert("Registration successful");
-    } catch (err) {
-      alert("Error: " + err?.response?.data?.error || "Something went wrong");
+
+    const users = JSON.parse(localStorage.getItem("registeredUsers")) || [];
+
+    const alreadyExists = users.find(
+      (user) => user.email.toLowerCase() === form.email.toLowerCase()
+    );
+
+    if (alreadyExists) {
+      alert("User already registered. Please login.");
+      return;
     }
+
+    const newUser = {
+      id: Date.now(),
+      name: form.name,
+      email: form.email,
+      password: form.password,
+      title: "Job Seeker",
+      phone: "",
+      location: "",
+      summary: "",
+      skills: ["HTML", "CSS", "JavaScript"],
+      education: "",
+      experience: "",
+      projects: "",
+    };
+
+    users.push(newUser);
+    localStorage.setItem("registeredUsers", JSON.stringify(users));
+
+    alert("Registration successful");
+    navigate("/login");
   };
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gradient-to-br from-blue-900 via-indigo-800 to-purple-900 px-4">
-      <div className="bg-white text-gray-800 rounded-2xl shadow-2xl w-full max-w-md p-8 md:p-10 animate-fade-in-up">
+      <div className="bg-white text-gray-800 rounded-2xl shadow-2xl w-full max-w-md p-8 md:p-10">
         <h2 className="text-3xl font-bold text-center mb-6">Create Account</h2>
         <p className="text-sm text-center text-gray-500 mb-8">
-          Join <span className="text-indigo-600 font-semibold">Job Buddy</span> and unlock your future!
+          Join <span className="text-indigo-600 font-semibold">Job Buddy</span>
+          {" "}and unlock your future!
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label htmlFor="name" className="block text-sm font-medium mb-1">Name</label>
+            <label className="block text-sm font-medium mb-1">Name</label>
             <input
               name="name"
               placeholder="Your Full Name"
+              value={form.name}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-indigo-500 outline-none"
+              className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm outline-none"
               required
             />
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-sm font-medium mb-1">Email</label>
+            <label className="block text-sm font-medium mb-1">Email</label>
             <input
               name="email"
               type="email"
               placeholder="you@example.com"
+              value={form.email}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-indigo-500 outline-none"
+              className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm outline-none"
               required
             />
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium mb-1">Password</label>
+            <label className="block text-sm font-medium mb-1">Password</label>
             <input
               name="password"
               type="password"
               placeholder="••••••••"
+              value={form.password}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-indigo-500 outline-none"
+              className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm outline-none"
               required
             />
           </div>
