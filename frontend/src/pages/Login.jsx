@@ -1,53 +1,76 @@
-import React, { useState, useContext } from "react";
-import API from "../services/api";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import { Link } from "react-router-dom";
 
 const Login = () => {
-  const [form, setForm] = useState({ email: "", password: "" });
+  const navigate = useNavigate();
   const { loginUser } = useContext(AuthContext);
 
-  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
 
-  const handleSubmit = async (e) => {
+  const handleChange = (e) => {
+    setForm((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      const res = await API.post("/users/login", form);
-      loginUser(res.data.token, res.data.user);
-    } catch (err) {
-      alert("Login failed");
+
+    const users = JSON.parse(localStorage.getItem("registeredUsers")) || [];
+
+    const matchedUser = users.find(
+      (user) =>
+        user.email.toLowerCase() === form.email.toLowerCase() &&
+        user.password === form.password
+    );
+
+    if (!matchedUser) {
+      alert("Invalid email or password");
+      return;
     }
+
+    const fakeToken = `token_${Date.now()}`;
+    loginUser(fakeToken, matchedUser);
+    navigate("/dashboard");
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-950 via-blue-900 to-blue-950 text-white px-4 w-[98vw]">
-      <div className="bg-white text-gray-800 rounded-2xl shadow-2xl w-full max-w-md p-8 md:p-10 animate-fade-in-up">
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-950 via-blue-900 to-blue-950 text-white px-4 w-[100vw]">
+      <div className="bg-white text-gray-800 rounded-2xl shadow-2xl w-full max-w-md p-8 md:p-10">
         <h2 className="text-3xl font-bold text-center mb-6">Welcome Back</h2>
         <p className="text-sm text-center text-gray-500 mb-8">
-          Log in to continue your journey with <span className="text-blue-500 font-semibold">Job Buddy</span>
+          Log in to continue your journey with{" "}
+          <span className="text-blue-500 font-semibold">Job Buddy</span>
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium mb-1">Email</label>
+            <label className="block text-sm font-medium mb-1">Email</label>
             <input
               name="email"
               type="email"
               placeholder="you@example.com"
+              value={form.email}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-indigo-500 outline-none"
+              className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm outline-none"
               required
             />
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium mb-1">Password</label>
+            <label className="block text-sm font-medium mb-1">Password</label>
             <input
               name="password"
               type="password"
               placeholder="••••••••"
+              value={form.password}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-indigo-500 outline-none"
+              className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm outline-none"
               required
             />
           </div>
