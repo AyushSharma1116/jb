@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Image from '../assets/image.jpg'; // Replace with your image path
+import Image from '../assets/image.jpg'; 
 import Navbar from './Navbar';
 import IndustryRoleSelection from './IndustryRoleSelection';
 
